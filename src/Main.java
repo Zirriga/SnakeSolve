@@ -12,38 +12,38 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Pane root = new Pane();
+        Pane root = new Pane(); //корневой элемент интерфейса
         Scene scene = new Scene(root,800,600);
         scene.setFill(Color.valueOf("#333333"));
         primaryStage.setTitle("Snake");
         primaryStage.setScene(scene);
         Game game = new Game(30,40);
         Canvas canvas = new Canvas(800,600);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GraphicsContext gc = canvas.getGraphicsContext2D(); //граф контекст в контроллер
         Controller.game = game;
         Controller.gc = gc;
-        root.getChildren().add(canvas);
+        root.getChildren().add(canvas); //полотно в корневой элемент интерфейса
         scene.setOnKeyPressed(event -> {
-            switch(event.getCode().toString()) {
-                case "UP":
+            switch (event.getCode()) {
+                case UP:
                     game.upDirection();
                     break;
-                case "DOWN":
+                case DOWN:
                     game.downDirection();
                     break;
-                case "LEFT":
+                case LEFT:
                     game.leftDirection();
                     break;
-                case "RIGHT":
+                case RIGHT:
                     game.rightDirection();
                     break;
-                case "SPACE":
+                case SPACE:
                     game.restart();
                     break;
             }
         });
-        primaryStage.setOnCloseRequest(event -> System.exit(0));
-        primaryStage.setResizable(false);
+        primaryStage.setOnCloseRequest(event -> System.exit(0)); //при закрытии окна закрытие приложения
+        primaryStage.setResizable(false); //чтоб не изменялся в размерах (не тянуть окно)
         primaryStage.show();
         game.start();
     }

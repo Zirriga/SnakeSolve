@@ -7,7 +7,7 @@ public class Field {
     private Snake snake;
     private Point food;
 
-    public Field(int height, int width) {
+    public Field(int height, int width) {//конструктор поля
         gamePlace = new int[height][width];
         this.height = height;
         this.width = width;
@@ -38,7 +38,7 @@ public class Field {
         do {
             y = ThreadLocalRandom.current().nextInt(0, height);
             x = ThreadLocalRandom.current().nextInt(0, width);
-        } while (get(y, x) == 1);
+        } while (get(y, x) == 1); //если занято змейкой
         food = new Point(y, x);
         refreshField();
     }
@@ -47,16 +47,16 @@ public class Field {
         return gamePlace[y][x];
     }
 
-    public void set(int y, int x, int value) {
+    private void set(int y, int x, int value) {
         gamePlace[y][x] = value;
     }
 
     public boolean checkMove() {
-        refreshField();
+        refreshField();//для точного местоположения
         Point head = snake.getHead();
-        Point velocity = snake.getVelocity();
+        Point velocity = snake.getVelocity();//текущее направление
         Point nextHeadLocation = new Point(head.getY() + velocity.getY(), head.getX() + velocity.getX());
-        return !(nextHeadLocation.getY() < 0 || nextHeadLocation.getY() > height - 1 ||
+        return !(nextHeadLocation.getY() < 0 || nextHeadLocation.getY() > height - 1 || //если вышла за пределы или кусила себя
                 nextHeadLocation.getX() < 0 || nextHeadLocation.getX() > width - 1 ||
                 get(nextHeadLocation.getY(), nextHeadLocation.getX()) == 1);
     }
@@ -64,12 +64,12 @@ public class Field {
     public void refreshField() {
         for (int i = 0; i < gamePlace.length; i++) {
             for (int j = 0; j < gamePlace[0].length; j++) {
-                gamePlace[i][j] = 0;
+                gamePlace[i][j] = 0; //очистка
             }
         }
-        set(food.getY(), food.getX(), 3);
+        set(food.getY(), food.getX(), 3); //кидаем еду (3)
         for (Point point : snake.getBody()) {
-            set(point.getY(), point.getX(), 1);
+            set(point.getY(), point.getX(), 1); //змейка (1)
         }
     }
 

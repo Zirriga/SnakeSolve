@@ -10,7 +10,7 @@ public class Controller {
         gc.clearRect(0, 0, 800, 600);
         for (int i = 0; i < game.getField().getHeight(); i++) {
             for (int j = 0; j < game.getField().getWidth(); j++) {
-                if (game.getField().get(i, j) != 0) {
+                if (game.getField().get(i, j) != 0) { //если что-то есть
                     switch (game.getField().get(i, j)) {
                         case 1:
                             gc.setFill(Color.valueOf("#aaaaaa"));

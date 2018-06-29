@@ -3,21 +3,21 @@ import java.util.List;
 
 public class Snake {
     private List<Point> snake = new LinkedList<>();
-    private int velocityX;
+    private int velocityX; //скорости по х и у
     private int velocityY;
     private int length;
 
     public Snake() {
-        snake.add(new Point(0, 0));
-        velocityX = 1;
+        snake.add(new Point(0, 0));//добавим голову
+        velocityX = 1;//направление вправо
         velocityY = 0;
         length = 1;
     }
 
     public void upDirection() {
-        if (length > 1 && snake.get(0).getY() - snake.get(1).getY() == 1) return;
+        if (length > 1 && snake.get(0).getY() - snake.get(1).getY() == 1) return; //коорд головы - коорд второго звена
         velocityX = 0;
-        velocityY = -1;
+        velocityY = -1; //движ вверх
     }
 
     public void downDirection() {
@@ -41,16 +41,16 @@ public class Snake {
 
     public void move() {
         snake.add(0,new Point(snake.get(0).getY() + velocityY, snake.get(0).getX() + velocityX));
-        snake.remove(snake.size() - 1);
+        snake.remove(snake.size() - 1); //коорд головы + движение и удаление хвоста
     }
 
-    public void moveAndIncrease() {
+    public void moveAndIncrease() { //если съела
         snake.add(0,new Point(snake.get(0).getY() + velocityY, snake.get(0).getX() + velocityX));
         length++;
     }
     public Point getVelocity() {
         return new Point(velocityY, velocityX);
-    }
+    }//получение скорости
     public Point getHead() {
         return snake.get(0);
     }

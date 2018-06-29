@@ -18,18 +18,17 @@ public class Game {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (field.checkMove()) {
-                    Controller.refresh();
+                if (field.checkMove()) { //может ли двигаться дальше
                     if (field.getFood().equals(field.getSnake().getHead())) {
                         field.getSnake().moveAndIncrease();
-                        score++;
+                        score++;//съела
                         if (field.area() == field.getSnake().getBody().size()){
                             win = true;
                         } else {
                             field.spawnFood();
                         }
                     } else {
-                        field.getSnake().move();
+                        field.getSnake().move(); //если голова != еда - двигаемся
                     }
                 } else {
                     gameOver = true;
