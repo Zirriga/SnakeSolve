@@ -53,8 +53,7 @@ public class Main extends Application {
 
         game.start();
     }
-
-
+    
     public static void main(String[] args) {
         launch(args);
     }
