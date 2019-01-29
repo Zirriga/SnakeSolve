@@ -1,31 +1,46 @@
+package SnakeGame;
+
+import Solver.Solver;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Game {
+    private Solver solver;
+
     private Field field;
     private Timer timer;
     private boolean gameOver = false;
     private boolean win = false;
     private boolean run = false;
     private int score = 0;
+
     public Game(int height, int width) {
         field = new Field(height, width);
+        solver = new Solver(this);
     }
 
     public void start() {
+
         run = true;
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                boolean increase = false;
+                if (field.getFood().equals(field.getSnake().getHead())) {
+                    field.spawnFood();
+                    increase = true;
+                }
+
+                solver.run();
+
                 if (field.checkMove()) { //может ли двигаться дальше
-                    if (field.getFood().equals(field.getSnake().getHead())) {
+                    if (increase) {
                         field.getSnake().moveAndIncrease();
                         score++;//съела
-                        if (field.area() == field.getSnake().getBody().size()){
+                        if (field.area() == field.getSnake().getBody().size()) {
                             win = true;
-                        } else {
-                            field.spawnFood();
                         }
                     } else {
                         field.getSnake().move(); //если голова != еда - двигаемся
@@ -37,7 +52,7 @@ public class Game {
                 Controller.refresh();
                 if (win || gameOver) stop();
             }
-        },0,300);
+        }, 0, 50);
     }
 
     public void stop() {
@@ -51,6 +66,7 @@ public class Game {
         field.clean();
         run = false;
     }
+
     public void restart() {
         stop();
         start();

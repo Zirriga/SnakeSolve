@@ -1,5 +1,6 @@
+package SnakeGame;
+
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,14 +13,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         Pane root = new Pane(); //корневой элемент интерфейса
         Scene scene = new Scene(root,800,600);
         scene.setFill(Color.valueOf("#333333"));
-        primaryStage.setTitle("Snake");
+
+        primaryStage.setTitle("SnakeGame.Snake");
         primaryStage.setScene(scene);
         Game game = new Game(30,40);
         Canvas canvas = new Canvas(800,600);
         GraphicsContext gc = canvas.getGraphicsContext2D(); //граф контекст в контроллер
+
         Controller.game = game;
         Controller.gc = gc;
         root.getChildren().add(canvas); //полотно в корневой элемент интерфейса
@@ -44,7 +48,9 @@ public class Main extends Application {
         });
         primaryStage.setOnCloseRequest(event -> System.exit(0)); //при закрытии окна закрытие приложения
         primaryStage.setResizable(false); //чтоб не изменялся в размерах (не тянуть окно)
+        primaryStage.sizeToScene();
         primaryStage.show();
+
         game.start();
     }
 

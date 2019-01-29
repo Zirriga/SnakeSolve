@@ -1,3 +1,5 @@
+package SnakeGame;
+
 public class Point {
     private int x;
     private int y;
@@ -6,11 +8,11 @@ public class Point {
         setXY(y, x);
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
 
-    int getY() {
+    public int getY() {
         return y;
     }
 
@@ -27,5 +29,15 @@ public class Point {
             return other.getX() == this.getX() && other.getY() == this.getY();
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return y + "-" + x;
+    }
+
+    @Override
+    public int hashCode() {
+        return y * 100 + x;
     }
 }

@@ -1,3 +1,5 @@
+package SnakeGame;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,8 +9,9 @@ public class Snake {
     private int velocityY;
     private int length;
 
+
     public Snake() {
-        snake.add(new Point(0, 0));//добавим голову
+        snake.add(new Point(1, 1));//добавим голову
         velocityX = 1;//направление вправо
         velocityY = 0;
         length = 1;
@@ -40,20 +43,27 @@ public class Snake {
     }
 
     public void move() {
-        snake.add(0,new Point(snake.get(0).getY() + velocityY, snake.get(0).getX() + velocityX));
+        snake.add(0, new Point(snake.get(0).getY() + velocityY, snake.get(0).getX() + velocityX));
         snake.remove(snake.size() - 1); //коорд головы + движение и удаление хвоста
     }
 
     public void moveAndIncrease() { //если съела
-        snake.add(0,new Point(snake.get(0).getY() + velocityY, snake.get(0).getX() + velocityX));
+        snake.add(0, new Point(snake.get(0).getY() + velocityY, snake.get(0).getX() + velocityX));
         length++;
     }
+/*
+    public void increase() {
+        snake.add(0, new Point(snake.get(0).getY() + velocityY, snake.get(0).getX() + velocityX));
+    }*/
+
     public Point getVelocity() {
         return new Point(velocityY, velocityX);
     }//получение скорости
+
     public Point getHead() {
         return snake.get(0);
     }
+
     public List<Point> getBody() {
         return snake;
     }

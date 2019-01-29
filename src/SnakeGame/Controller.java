@@ -1,3 +1,5 @@
+package SnakeGame;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -13,11 +15,16 @@ public class Controller {
                 if (game.getField().get(i, j) != 0) { //если что-то есть
                     switch (game.getField().get(i, j)) {
                         case 1:
-                            gc.setFill(Color.valueOf("#aaaaaa"));
+                            gc.setFill(Color.valueOf("#aaaaaa")); //змейка
+                            break;
+                        case 2:
+                            gc.setFill(Color.valueOf("#fc4e4e")); //голова
                             break;
                         case 3:
-                            gc.setFill(Color.valueOf("#ff5599"));
+                            gc.setFill(Color.valueOf("#8eff84")); //еда
                             break;
+                        case 4:
+                            gc.setFill(Color.valueOf("#4e82fc")); //преграда
                     }
                     gc.fillRect(j * 20, i * 20, 20, 20);
                 }
